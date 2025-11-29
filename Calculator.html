@@ -3,97 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WaffleCalc - Calculator</title>
+<title>RealCalc - Calculator</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #fff4d6;
-        text-align: center;
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #dfe9ff;
+    text-align: center;
+}
 
-    header {
-        background: #ffa733;
-        padding: 20px;
-        color: white;
-    }
+header {
+    background: #3a6bff;
+    color: white;
+    padding: 25px;
+}
 
-    nav {
-        background: #ff8c1a;
-        padding: 10px;
-    }
+nav {
+    background: #214cff;
+    padding: 12px;
+}
 
-    nav a {
-        color: white;
-        margin: 15px;
-        text-decoration: none;
-        font-size: 1.2rem;
-    }
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+    font-size: 1.2rem;
+}
 
-    #display {
-        width: 240px;
-        height: 50px;
-        margin-top: 20px;
-        font-size: 24px;
-        text-align: right;
-        padding: 5px;
-        border: 2px solid #ff8c1a;
-        border-radius: 8px;
-        background: #fff;
-    }
+.calculator {
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    width: 260px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
 
-    .calculator {
-        background: #ffd699;
-        display: inline-block;
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 10px;
-    }
+#display {
+    width: 100%;
+    height: 55px;
+    font-size: 26px;
+    text-align: right;
+    padding: 10px;
+    border: 2px solid #3a6bff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
 
-    .buttons {
-        display: grid;
-        grid-template-columns: repeat(4, 60px);
-        gap: 10px;
-        margin-top: 10px;
-    }
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
 
-    button {
-        padding: 15px;
-        font-size: 18px;
-        border: none;
-        border-radius: 5px;
-        background: #ffe0b3;
-        cursor: pointer;
-    }
+button {
+    padding: 15px;
+    font-size: 20px;
+    border: none;
+    background: #e6ecff;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-    button:hover {
-        background: #ffd699;
-    }
+button:hover {
+    background: #d2ddff;
+}
 
-    .clear {
-        background: #ff5733;
-        color: white;
-    }
+.clear {
+    background: #ff4949;
+    color: white;
+}
 
-    .equal {
-        background: #28a745;
-        color: white;
-    }
-
-    img {
-        width: 180px;
-        margin-top: 20px;
-        border-radius: 10px;
-    }
+.equal {
+    background: #29a329;
+    color: white;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>WaffleCalc - Calculator</h1>
-    <p>Calculate anything. Waffle optional.</p>
+    <h1>RealCalc - Calculator</h1>
 </header>
 
 <nav>
@@ -101,53 +93,61 @@
     <a href="calculator.html">Calculator</a>
 </nav>
 
-<img src="https://images.unsplash.com/photo-1604908177221-055195d27de4" alt="Cute waffle">
-
 <div class="calculator">
     <input type="text" id="display" disabled>
 
     <div class="buttons">
         <button onclick="clearDisplay()" class="clear">C</button>
-        <button onclick="append('/')">/</button>
-        <button onclick="append('*')">*</button>
-        <button onclick="append('-')">-</button>
+        <button onclick="addValue('/')">/</button>
+        <button onclick="addValue('*')">*</button>
+        <button onclick="deleteLast()">DEL</button>
 
-        <button onclick="append('7')">7</button>
-        <button onclick="append('8')">8</button>
-        <button onclick="append('9')">9</button>
-        <button onclick="append('+')">+</button>
+        <button onclick="addValue('7')">7</button>
+        <button onclick="addValue('8')">8</button>
+        <button onclick="addValue('9')">9</button>
+        <button onclick="addValue('-')">-</button>
 
-        <button onclick="append('4')">4</button>
-        <button onclick="append('5')">5</button>
-        <button onclick="append('6')">6</button>
+        <button onclick="addValue('4')">4</button>
+        <button onclick="addValue('5')">5</button>
+        <button onclick="addValue('6')">6</button>
+        <button onclick="addValue('+')">+</button>
+
+        <button onclick="addValue('1')">1</button>
+        <button onclick="addValue('2')">2</button>
+        <button onclick="addValue('3')">3</button>
         <button onclick="calculate()" class="equal">=</button>
 
-        <button onclick="append('1')">1</button>
-        <button onclick="append('2')">2</button>
-        <button onclick="append('3')">3</button>
-        <button onclick="append('0')">0</button>
+        <button onclick="addValue('0')" style="grid-column: span 2;">0</button>
+        <button onclick="addValue('.')">.</button>
     </div>
 </div>
 
 <script>
-function append(value) {
-    document.getElementById("display").value += value;
+// Beginner-style calculator logic
+
+let display = document.getElementById("display");
+
+function addValue(value) {
+    display.value += value;
 }
 
 function clearDisplay() {
-    document.getElementById("display").value = "";
+    display.value = "";
+}
+
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
 }
 
 function calculate() {
     try {
-        let result = eval(document.getElementById("display").value);
-        document.getElementById("display").value = result;
+        let result = eval(display.value);
+        display.value = result;
     } catch {
-        document.getElementById("display").value = "Error";
+        display.value = "Error";
     }
 }
 </script>
 
 </body>
 </html>
-
