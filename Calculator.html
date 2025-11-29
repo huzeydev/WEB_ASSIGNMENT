@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WaffleCalc - Calculator</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #fff4d6;
+        text-align: center;
+    }
+
+    header {
+        background: #ffa733;
+        padding: 20px;
+        color: white;
+    }
+
+    nav {
+        background: #ff8c1a;
+        padding: 10px;
+    }
+
+    nav a {
+        color: white;
+        margin: 15px;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    #display {
+        width: 240px;
+        height: 50px;
+        margin-top: 20px;
+        font-size: 24px;
+        text-align: right;
+        padding: 5px;
+        border: 2px solid #ff8c1a;
+        border-radius: 8px;
+        background: #fff;
+    }
+
+    .calculator {
+        background: #ffd699;
+        display: inline-block;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 60px);
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    button {
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        background: #ffe0b3;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #ffd699;
+    }
+
+    .clear {
+        background: #ff5733;
+        color: white;
+    }
+
+    .equal {
+        background: #28a745;
+        color: white;
+    }
+
+    img {
+        width: 180px;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>WaffleCalc - Calculator</h1>
+    <p>Calculate anything. Waffle optional.</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="calculator.html">Calculator</a>
+</nav>
+
+<img src="https://images.unsplash.com/photo-1604908177221-055195d27de4" alt="Cute waffle">
+
+<div class="calculator">
+    <input type="text" id="display" disabled>
+
+    <div class="buttons">
+        <button onclick="clearDisplay()" class="clear">C</button>
+        <button onclick="append('/')">/</button>
+        <button onclick="append('*')">*</button>
+        <button onclick="append('-')">-</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('+')">+</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="calculate()" class="equal">=</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('0')">0</button>
+    </div>
+</div>
+
+<script>
+function append(value) {
+    document.getElementById("display").value += value;
+}
+
+function clearDisplay() {
+    document.getElementById("display").value = "";
+}
+
+function calculate() {
+    try {
+        let result = eval(document.getElementById("display").value);
+        document.getElementById("display").value = result;
+    } catch {
+        document.getElementById("display").value = "Error";
+    }
+}
+</script>
+
+</body>
+</html>
